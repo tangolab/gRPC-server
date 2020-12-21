@@ -1,0 +1,41 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+package com.news.jobs.grpc.server;
+
+message Criteria {
+  string Title = 1;
+  string Location = 2;
+  int32 Interval = 3;
+  int32 ChunkSize = 4;
+}
+
+message Job {
+  string Description = 1;
+}
+
+message Coordinates{
+  int32 left = 1;
+  int32 top = 2;
+}
+
+message AreaVisited {
+  int32 loc_1 = 1;
+  int32 loc_2 = 2;
+  int32 loc_3 = 3;
+  int32 loc_4 = 4;
+  string map = 5;
+}
+service JobsService {
+  rpc getTopJob(Criteria) returns (Job);
+
+  //server streaming
+  rpc getOpenJobs(Criteria) returns (stream Job);
+
+  //client streaming
+  rpc sendMouseMove(stream Coordinates) returns (AreaVisited);
+
+  //bi-directional streaming
+  rpc mouseStorm(stream Coordinates) returns (stream AreaVisited);
+
+}
