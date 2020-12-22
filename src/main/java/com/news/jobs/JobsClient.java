@@ -31,7 +31,7 @@ public class JobsClient {
   @PostConstruct
   private void init() {
     LOGGER.info("Client initialized");
-    ManagedChannel managedChannel = ManagedChannelBuilder.forAddress("localhost", 9898).usePlaintext().build();
+    ManagedChannel managedChannel = ManagedChannelBuilder.forAddress("localhost", 8002).usePlaintext().build();
     jobsServiceBlockingStub = JobsServiceGrpc.newBlockingStub(managedChannel);
   }
 
@@ -58,7 +58,7 @@ public class JobsClient {
 
   public String PerformClientStreaming(String location){
     LOGGER.info("Starting streaming test");
-    ManagedChannel managedChannel = ManagedChannelBuilder.forAddress("localhost", 9898).usePlaintext().build();
+    ManagedChannel managedChannel = ManagedChannelBuilder.forAddress("localhost", 8002).usePlaintext().build();
 
     JobsServiceStub asyncJobsrvc = JobsServiceGrpc.newStub(managedChannel);
 
